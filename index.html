@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item item1">
+            <button class="swap-btn">Змінити блоки x-y</button>
+            <div class="x-block">
+                <h2>Блок X</h2>
+            </div>
+            <a href="#" class="edit-link">Редагувати</a>
+        </div>
+        <div class="grid-item item2">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra vehicula orci sit amet suscipit. 
+                Integer efficitur, nisl eget ultricies aliquam, ante ante accumsan elit, non volutpat mauris elit vitae felis. 
+                Etiam nec ligula at risus hendrerit rhoncus. Integer varius vehicula elit, ac pretium lectus molestie a. Etiam quis enim et lacus suscipit accumsan.</p>
+            <input type="color" id="colorInput">
+            <a href="#" class="edit-link">Редагувати</a>
+        </div>
+        <div class="grid-item item3">
+            <form class="radius-form">
+                <label>Введіть радіус кола для обчислення площі:</label><br>
+                <input type="number" class="radius-input" required>
+                <button type="button" onclick="calculateCircleArea()">Обчислити</button>
+            </form>
+            <form id="maxNumberForm">
+                <label>Введіть 10 чисел:</label><br>
+                <input type="number" name="num1">
+                <input type="number" name="num2">
+                <input type="number" name="num3">
+                <input type="number" name="num4">
+                <input type="number" name="num5">
+                <input type="number" name="num6">
+                <input type="number" name="num7">
+                <input type="number" name="num8">
+                <input type="number" name="num9">
+                <input type="number" name="num10">
+                <button type="button" onclick="processNumbers()">Обчислити</button>
+            </form>
+            <a href="#" class="edit-link">Редагувати</a>
+        </div>
+        <div class="grid-item item4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra vehicula orci sit amet suscipit. 
+                Integer efficitur, nisl eget ultricies aliquam, ante ante accumsan elit, non volutpat mauris elit vitae felis. 
+                Etiam nec ligula at risus hendrerit rhoncus. Integer varius vehicula elit, ac pretium lectus molestie a. Etiam quis enim et lacus suscipit accumsan.</p>
+            <a href="#" class="edit-link">Редагувати</a>
+        </div>
+        <div class="grid-item item5">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra vehicula orci sit amet suscipit. 
+                Integer efficitur, nisl eget ultricies aliquam, ante ante accumsan elit, non volutpat mauris elit vitae felis. 
+                Etiam nec ligula at risus hendrerit rhoncus. Integer varius vehicula elit, ac pretium lectus molestie a. Etiam quis enim et lacus suscipit accumsan.</p>
+            <a href="#" class="edit-link">Редагувати</a>
+        </div>
+        <div class="grid-item item6">
+            <div class="y-block">
+                <h3>Блок Y</h3>
+            </div>
+            <a href="#" class="edit-link">Редагувати</a>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
