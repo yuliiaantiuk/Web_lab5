@@ -173,7 +173,11 @@ function editHTML(itemNum) {
       localStorage.setItem(`item${itemNum}BgColor`, color);
       block.dataset.originalContent = originalContent;
       block.classList.remove('editing-item');
-      addResetButton(block, itemNum);
+      const resetClassName = `.reset${itemNum}`
+      const resetBtn = document.querySelector(this.resetClassName);
+      if(!resetBtn){
+        addResetButton(block, itemNum);
+      }
     });
   
     document.getElementById(`cancel${itemNum}`).addEventListener('click', function () {
@@ -208,6 +212,7 @@ function addResetButton(block, itemNum) {
     const resetButton = document.createElement('button');
     resetButton.textContent = 'Скинути';
     resetButton.classList.add('editing-btn');
+    resetButton.classList.add(`reset${itemNum}`);
     resetButton.addEventListener('click', () => {
         location.reload();
         localStorage.removeItem(`item${itemNum}Content`);
