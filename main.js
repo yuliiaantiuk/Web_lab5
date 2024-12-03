@@ -1,5 +1,3 @@
-const x_block = document.querySelector('.x-block');
-const y_block = document.querySelector('.y-block');
 const swap_btn = document.querySelector('.swap-btn');
 const block1 = document.querySelector('.item1');
 const block2 = document.querySelector('.item2');
@@ -15,11 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Task 1
-swap_btn.addEventListener('click', () => {
-    let tempContent = x_block.innerHTML; 
-    x_block.innerHTML = y_block.innerHTML; 
-    y_block.innerHTML = tempContent;   
-});
+function swapContent(){
+  const currentXBlock = document.querySelector('.x-block');
+  const currentYBlock = document.querySelector('.y-block');
+  let tempContent = currentXBlock.innerHTML;
+  currentXBlock.innerHTML = currentYBlock.innerHTML;
+  currentYBlock.innerHTML = tempContent;
+}
+
 //Task 2
 function calculateCircleArea() {
     const radiusInput = document.querySelector('.radius-input');
