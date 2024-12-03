@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedColor) {
       block2.style.backgroundColor = savedColor;
     }
+    // document.querySelector('button').addEventListener('click', processNumbers);
 });
 
 //Task 1
@@ -30,26 +31,28 @@ function swapContent(){
 //Task 2
 function calculateCircleArea() {
     const radiusInput = document.querySelector('.radius-input');
-    const radius = parseFloat(radiusInput.value);
+    if(radiusInput){
+      const radius = parseFloat(radiusInput.value);
 
-    if (isNaN(radius) || radius <= 0) {
-        alert('Будь ласка, введіть додатне число для радіуса.');
-        return;
-    }
-    if (radius > 10000000){
-        alert('Будь ласка, введіть число менше 10000000 для радіуса.');
-        return;
-    }
-    const area = Math.PI * Math.pow(radius, 2);
-
-    const existingArea = block3.querySelector('.circle-area');
-    if (existingArea) {
-        existingArea.textContent = `Площа кола з радіусом ${radius}: ${area.toFixed(2)}`;
-    } else {
-        const newArea = document.createElement('p');
-        newArea.className = 'circle-area';
-        newArea.textContent = `Площа кола з радіусом ${radius}: ${area.toFixed(2)}`;
-        block3.appendChild(newArea);
+      if (isNaN(radius) || radius <= 0) {
+          alert('Будь ласка, введіть додатне число для радіуса.');
+          return;
+      }
+      if (radius > 10000000){
+          alert('Будь ласка, введіть число менше 10000000 для радіуса.');
+          return;
+      }
+      const area = Math.PI * Math.pow(radius, 2);
+  
+      const existingArea = block3.querySelector('.circle-area');
+      if (existingArea) {
+          existingArea.textContent = `Площа кола з радіусом ${radius}: ${area.toFixed(2)}`;
+      } else {
+          const newArea = document.createElement('p');
+          newArea.className = 'circle-area';
+          newArea.textContent = `Площа кола з радіусом ${radius}: ${area.toFixed(2)}`;
+          block3.appendChild(newArea);
+      }
     }
 }
 
@@ -79,20 +82,22 @@ if (cookieData) {
 function processNumbers() {
     let numbers = [];
     const form = document.getElementById("maxNumberForm");
-
-    for (let i = 1; i <= 10; i++) {
-      const value = form[`num${i}`].value;
-      if (value === '' || isNaN(value)) {
-        alert("Будь ласка, введіть числа в усі поля форми");
-        return;
+    const inputs = document.querySelectorAll('.numInp');
+    if(inputs.length > 0){
+      for (let i = 1; i <= inputs.length; i++) {
+        const value = form[`num${i}`].value;
+        if (value === '' || isNaN(value)) {
+          alert("Будь ласка, введіть числа в усі поля форми");
+          return;
+        }
+        numbers.push(parseFloat(value));
       }
-      numbers.push(parseFloat(value));
+    
+        const max = Math.max(...numbers);
+        const maxCount = numbers.filter(num => num === max).length;
+        alert(`Maximum value: ${max}, Count: ${maxCount}`);
+        document.cookie = `maxValues=${maxCount}; path=/`;
     }
-  
-      const max = Math.max(...numbers);
-      const maxCount = numbers.filter(num => num === max).length;
-      alert(`Maximum value: ${max}, Count: ${maxCount}`);
-      document.cookie = `maxValues=${maxCount}; path=/`;
 }
 
 //Task 4
@@ -150,9 +155,11 @@ function editHTML(itemNum) {
   
     block.classList.add('editing-item');
     block.innerHTML = `
-      <textarea>${originalContent}</textarea>
-      <button id="save${itemNum}" class="editing-btn">Зберегти</button>
-      <button id="cancel${itemNum}" class="editing-btn">Закрити</button>
+      <div class="editing-container"> 
+          <textarea class="editing-area">${originalContent}</textarea>
+          <button id="save${itemNum}" class="editing-btn">Зберегти</button>
+          <button id="cancel${itemNum}" class="editing-btn">Закрити</button>
+      </div>
     `;
   
     document.getElementById(`save${itemNum}`).addEventListener('click', function () {
