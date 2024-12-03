@@ -7,6 +7,8 @@ const block5 = document.querySelector('.item5');
 const block6 = document.querySelector('.item6');
 const colorPicker = document.getElementById('colorInput');
 const editLinks = document.querySelectorAll('.edit-link');
+const areaBtn = document.querySelector(".areaBtn");
+const numBtn = document.querySelector(".maxNumberBtn");
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeBlocksFromLocalStorage();
@@ -14,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedColor) {
       block2.style.backgroundColor = savedColor;
     }
-    // document.querySelector('button').addEventListener('click', processNumbers);
 });
 
 //Task 1
@@ -115,7 +116,7 @@ function changeColor() {
     localStorage.setItem('item2Color', color);
   }
 
-//Task 5
+//Task 5 (реініціалізувати події селектори)
 function initializeBlocksFromLocalStorage() {
     for (let i = 1; i <= 6; i++) {
       const block = document.querySelector(`.item${i}`);
@@ -136,13 +137,14 @@ function initializeBlocksFromLocalStorage() {
       }
       block.dataset.originalContent = block.innerHTML;
     }
+  //   editLinks.forEach((link, index) => {
+  //     if(link){
+  //       link.addEventListener('dblclick', () => editHTML(index + 1));
+  //     }
+  // });
 
-    editLinks.forEach((link, index) => {
-        link.addEventListener('dblclick', () => editHTML(index + 1));
-    });
-  
-    colorPicker.addEventListener('blur', changeColor);
-    colorPicker.disabled = false;
+  colorPicker.addEventListener('blur', changeColor);
+  colorPicker.disabled = false;
 }
 
 function editHTML(itemNum) {
@@ -185,6 +187,12 @@ function editHTML(itemNum) {
       }
       block.classList.remove('editing-item');
     });
+    editLinks.forEach((link, index) => {
+      if(link){
+        link.removeEventListener('dblclick', () => editHTML(index + 1));
+        link.addEventListener('dblclick', () => editHTML(index + 1));
+      }
+  });
   }
 
   function getRandomColor() {
@@ -215,6 +223,7 @@ function addResetButton(block, itemNum) {
     });
     block.appendChild(resetButton);
 }
+
 
 
 
