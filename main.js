@@ -111,9 +111,19 @@ function initializeBlocksFromLocalStorage() {
     for (let i = 1; i <= 6; i++) {
       const block = document.querySelector(`.item${i}`);
       const savedContent = localStorage.getItem(`item${i}Content`);
+      const savedBlockColor = localStorage.getItem(`item${i}BgColor`)
       if (savedContent) {
         block.innerHTML = savedContent;
         addResetButton(block, i);
+      }
+      if (savedBlockColor) {
+        block.style.backgroundColor = savedBlockColor;
+      }
+      if (!savedBlockColor && i == 2){
+        const savedColor = localStorage.getItem('item2Color');
+        if (savedColor) {
+          document.querySelector('.item2').style.backgroundColor = savedColor;
+        }
       }
       block.dataset.originalContent = block.innerHTML;
     }
@@ -122,10 +132,6 @@ function initializeBlocksFromLocalStorage() {
         link.addEventListener('dblclick', () => editHTML(index + 1));
     });
   
-    const savedColor = localStorage.getItem('item2Color');
-    if (savedColor) {
-      document.querySelector('.item2').style.backgroundColor = savedColor;
-    }
     colorPicker.addEventListener('blur', changeColor);
     colorPicker.disabled = false;
 }
@@ -147,9 +153,11 @@ function editHTML(itemNum) {
   
     document.getElementById(`save${itemNum}`).addEventListener('click', function () {
       const newContent = block.querySelector('textarea').value;
+      const color = getRandomColor();
       block.innerHTML = newContent;
-      block.style.backgroundColor = getRandomColor(); 
+      block.style.backgroundColor = color; 
       localStorage.setItem(`item${itemNum}Content`, newContent);
+      localStorage.setItem(`item${itemNum}BgColor`, color);
       block.dataset.originalContent = originalContent;
       block.classList.remove('editing-item');
       addResetButton(block, itemNum);
@@ -175,12 +183,16 @@ function addResetButton(block, itemNum) {
     const resetButton = document.createElement('button');
     resetButton.textContent = 'Скинути';
     resetButton.addEventListener('click', () => {
+        location.reload();
         localStorage.removeItem(`item${itemNum}Content`);
+        localStorage.removeItem(`item${itemNum}BgColor`);
+        block.style.backgroundColor = '';
         block.innerHTML = block.dataset.originalContent;
+        const savedColor = localStorage.getItem('item2Color');
         if (savedColor) {
             block2.style.backgroundColor = savedColor;
         } else {
-            block.style.backgroundColor = '';
+            block2.style.backgroundColor = '';
         }
     });
     block.appendChild(resetButton);
