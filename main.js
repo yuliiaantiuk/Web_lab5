@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function swapContent(){
   const currentXBlock = document.querySelector('.x-block');
   const currentYBlock = document.querySelector('.y-block');
-  let tempContent = currentXBlock.innerHTML;
-  currentXBlock.innerHTML = currentYBlock.innerHTML;
-  currentYBlock.innerHTML = tempContent;
+  if (currentXBlock.innerHTML && currentYBlock.innerHTML){
+    let tempContent = currentXBlock.innerHTML;
+    currentXBlock.innerHTML = currentYBlock.innerHTML;
+    currentYBlock.innerHTML = tempContent;
+  }
 }
 
 //Task 2
