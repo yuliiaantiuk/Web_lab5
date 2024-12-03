@@ -10,6 +10,10 @@ const editLinks = document.querySelectorAll('.edit-link');
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeBlocksFromLocalStorage();
+    const savedColor = localStorage.getItem('item2Color');
+    if (savedColor) {
+      block2.style.backgroundColor = savedColor;
+    }
 });
 
 //Task 1
@@ -46,6 +50,7 @@ function calculateCircleArea() {
         block3.appendChild(newArea);
     }
 }
+
 //Task 3
 function deleteCookies() {
     let cookies = document.cookie.split(";");
@@ -90,10 +95,6 @@ function processNumbers() {
 
 //Task 4
 colorPicker.addEventListener('blur', changeColor);
-const savedColor = localStorage.getItem('item2Color');
-if (savedColor) {
-    block2.style.backgroundColor = savedColor;
-}
 
 function changeColor() {
     const block = document.querySelector('.item2');
@@ -148,8 +149,8 @@ function editHTML(itemNum) {
     block.classList.add('editing-item');
     block.innerHTML = `
       <textarea>${originalContent}</textarea>
-      <button id="save${itemNum}">Зберегти</button>
-      <button id="cancel${itemNum}">Закрити</button>
+      <button id="save${itemNum}" class="editing-btn">Зберегти</button>
+      <button id="cancel${itemNum}" class="editing-btn">Закрити</button>
     `;
   
     document.getElementById(`save${itemNum}`).addEventListener('click', function () {
@@ -183,6 +184,7 @@ function editHTML(itemNum) {
 function addResetButton(block, itemNum) {
     const resetButton = document.createElement('button');
     resetButton.textContent = 'Скинути';
+    resetButton.classList.add('editing-btn');
     resetButton.addEventListener('click', () => {
         location.reload();
         localStorage.removeItem(`item${itemNum}Content`);
