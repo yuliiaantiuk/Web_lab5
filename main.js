@@ -168,6 +168,12 @@ function editHTML(itemNum) {
     document.getElementById(`cancel${itemNum}`).addEventListener('click', function () {
       block.innerHTML = originalContent;
       block.style.backgroundColor = '';
+      if(itemNum == 2){
+        const savedColor = localStorage.getItem('item2Color');
+        if (savedColor) {
+          block2.style.backgroundColor = savedColor;
+        }
+      }
       block.classList.remove('editing-item');
     });
   }
